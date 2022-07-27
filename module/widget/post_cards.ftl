@@ -1,65 +1,73 @@
-<div class="posts grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-1 lg:gap-6 md:gap-4 sm:gap-3 mt-4">
+<div class="posts grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-1 lg:gap-6 md:gap-4 sm:gap-3 mt-4 pagination-container"
+     id="pageContainer">
   <#if posts?? && posts.getTotalElements() gt 0>
     <#list posts.content as post>
-      <div class="post-card bg-white dark:bg-gray-800 hover:shadow-xl transition-all duration-600 m-auto mt-4 rounded-2xl cursor-pointer w-auto shadow-md">
+      <div class="relative flex flex-col slide-up overflow-hidden rounded-lg w-full bg-base-100 shadow-xl mt-4">
         <#if post.topPriority gt 0>
-          <div class="post-top z-50 w-24 h-24 overflow-hidden absolute">
+          <div class="post-top w-24 h-24 overflow-hidden absolute">
             <div class="shadow-lg text-center transform -rotate-45 relative py-1 px-0 top-3 -left-8 w-28 bg-red-600 text-gray-100">
               置顶
             </div>
           </div>
         </#if>
-        <header class="card-header rounded-t-lg overflow-hidden h-48">
-          <#if post.thumbnail?? && post.thumbnail!=''>
-            <a href="${post.fullPath!}"
-               class="img-cover-bg flex justify-center items-center h-48">
-              <img class="lazyload object-cover block relative h-48 dark:filter-60" src="${theme_base!}/source/images/loading.svg"
+        <figure class="flex items-center justify-center h-56 cursor-pointer">
+          <a href="${post.fullPath!}" class="w-full">
+            <#if post.thumbnail?? && post.thumbnail!=''>
+              <img class="lazyload object-cover w-full h-56 no-zoom"
+                   src="${theme_base!}/source/images/loading.gif"
                    data-src="${post.thumbnail!''}" alt="${post.title}"/>
-            </a>
-          <#elseif settings.card_random_cover_list?? && settings.card_random_cover_list != ''>
-            <a href="${post.fullPath!}" class="img-cover-bg flex justify-center items-center h-48">
-              <img class="object-cover block relative h-48 img-random dark:filter-60" index="${post_index}"
-                   src="${theme_base!}/source/images/loading.svg" data-src="" alt="${post.title!}"/>
-            </a>
-          <#else>
-            <a data-ajax href="${post.fullPath!}"
-               class="object-cover block relative h-48 block relative overflow-hidden ">
-              <span class="full-image placeholder-bg" role="img" aria-label=""></span>
-            </a>
+            <#elseif settings.card_random_cover_list?? && settings.card_random_cover_list != ''>
+              <img class="object-cover w-full h-56 img-random no-zoom"
+                   index="${post_index}"
+                   src="${theme_base!}/source/images/loading.gif"
+                   alt="${post.title!}"
+              />
+            <#else>
+              <span class="full-image placeholder-bg w-full h-56" role="img" aria-label=""></span>
+            </#if>
+          </a>
+        </figure>
+        <div class="flex flex-col gap-2 px-4 py-6 bg-white dark:bg-gray-800" style="flex: 1 1 auto; ">
+          <#if settings.post_card_tag!false>
+            <div class="text-sm h-5 overflow-hidden">
+              <#if post.tags?size gt 0>
+                <#list post.tags as tag>
+<#--                  <#if tag_index &lt; 1>-->
+                    <a href="${tag.fullPath!}" class="relative inline-block badge">
+                      <i class="bg-red-400 opacity-10 absolute top-0 left-0 w-full h-full" style="background-color: ${tag.color!'rgba(248,113,113,1)'}"></i>
+                      <span class="badge-outline text-red-400 h-5 px-2 py-0.5 rounded-sm cursor-pointer"
+                            style="color: ${tag.color!'rgba(248,113,113,1)'}"
+                            data-value="${tag.name}">
+                        ${tag.name}
+                      </span>
+                    </a>
+<#--                  </#if>-->
+                </#list>
+              </#if>
+            </div>
           </#if>
-        </header>
-        <div class=" flex-auto py-1 px-2">
-          <p class="text-center text-xl tracking-wider svg-f line-clamp-1">
-            <a href="${post.fullPath!}"
-               class="font-medium text-gray-700 hover:text-red-600 transition-all duration-600 text-left text-gray-800 dark:text-gray-300">
-              ${post.title!}
-            </a>
-          </p>
-          <#if settings.card_hover_summary!false>
-            <p class="pt-4 text-base h-24 text-gray-700 break-all leading-relaxed text-sm tracking-wider line-clamp-3 font-sans text-gray-800 dark:text-gray-400">
-              ${post.summary!}
-            </p>
+          <h2 class="flex items-center gap-2 text-xl leading-7 <#if settings.post_card_tag>mb-2 mt-3 <#else> my-4 </#if>">
+            <a href="${post.fullPath!}" class="text-gray-800 dark:text-gray-300">${post.title!}</a>
+          </h2>
+          <#if settings.post_card_meta_info!false>
+            <div class="grad grid-cols-2 text-sm">
+              <div class="inline-block text-gray-500">
+                <span>${post.createTime?string("yyyy-MM-dd")}</span>
+              </div>
+              <div class="inline-block float-right">
+                <span class="iconfont icon-see2 text-gray-500">
+                  <label>${post.visits}</label>
+                </span>
+                <span class="iconfont icon-uqur text-gray-500">
+                   <label>${post.commentCount}</label>
+                </span>
+                <span class="iconfont icon-like text-gray-500">
+                  <label>${post.likes}</label>
+                </span>
+              </div>
+            </div>
           </#if>
         </div>
-        <footer class="border-gray-100 border-t py-3 px-6 leading-none text-lg font-medium tracking-wider flex justify-between svg-f text-gray-800 dark:text-gray-300">
-                    <span class="iconfont icon-calendar leading-8 text-base"
-                          style="margin-right: 5px"></span>
-          <span class="leading-8 mr-auto">
-                        <span>${post.createTime?string("yyyy-MM-dd")}</span>
-                    </span>
-          <div class="leading-8">
-                        <span>
-                            <span>${post.visits!}</span>
-                            <a href="javascript:void(0)" class="eye-sight text-gray-800">
-                                <span class="iconfont icon-Eyesight text-gray-800 dark:text-gray-300"> </span>
-                            </a>
-                        </span>
-            <span>
-                            <span>${post.commentCount}</span>
-                            <span class="iconfont icon-comment text-gray-800 dark:text-gray-300"> </span>
-                        </span>
-          </div>
-        </footer>
       </div>
     </#list>
   </#if>

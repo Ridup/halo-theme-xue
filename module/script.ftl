@@ -9,13 +9,6 @@
     </script>
 </#if>
 
-<#--<script defer src="${theme_base!}/source/js/heti-addon.min.js"></script>-->
-<#--<script>-->
-<#--  const heti = new Heti('.heti');-->
-<#--  heti.autoSpacing(); // 自动进行中西文混排美化和标点挤压-->
-<#--</script>-->
-
-
 <script type="text/javascript">
   // console.clear();
   console.log("%c 有朋自远方来, 不亦说乎.", "background:#24272A; color:#ffffff", "");
@@ -40,7 +33,13 @@
         if (photoArr[i] && photoArr[i].trim().length > 0){
              photos.push(photoArr[i].trim());
         }
-
+    }
+    // 随机排列图片
+    for (let index = 0; index < photos.length; index++) {
+        let randomIndex = Math.floor(Math.random() * photos.length);
+        let temp = photos[randomIndex];
+        photos[randomIndex] = photos[index];
+        photos[index] = temp;
     }
   }
 </script>

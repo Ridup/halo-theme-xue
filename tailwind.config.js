@@ -38,7 +38,15 @@ module.exports = {
         '60': 'brightness(0.6)',
       },
       boxShadow: {
-        
+        'lx': '0 1px 40px -8px rgb(0 0 0 / 50%)',
+        'none': 'none',
+      },
+      maxWidth: {
+        '16': '16rem',
+      },
+      margin: {
+        'card': '68px auto 0',
+        'avatar': '-52px 8px 4px',
       },
     },
     rotate: {
@@ -51,6 +59,9 @@ module.exports = {
     },
     maxHeight: {
       '200': '200px'
+    },
+    transform: {
+      '-half': 'translate(-50%,-50%)',
     },
   },
   variants: {
