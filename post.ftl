@@ -45,7 +45,7 @@
                   <i class="bg-red-400 opacity-10 hover:opacity-20 absolute top-0 left-0 w-full h-full"
                      style="background-color: ${tag.color!'rgba(248,113,113,1)'}"></i>
                   <span class="badge-outline text-red-400 h-5 px-2 py-0.5 rounded-sm cursor-pointer"
-                        style="color: ${tag.color!'rgba(248,113,113,1)'}"
+                        style="font-size: 1rem; font-weight:400; color: ${tag.color!'rgba(248,113,113,1)'}"
                         data-value="${tag.name}">
                         ${tag.name}
                       </span>
@@ -55,7 +55,7 @@
           </div>
           <#if settings.allow_share!true>
             <div class="share-items">
-              <a class="share-link" href="javascript:;" data-clipboard-text="${blog_url!}${post.fullPath!}"
+              <a class="share-link share-item" href="javascript:;" data-clipboard-text="${post.fullPath!}"
                  rel="noopener noreferrer" title="复制文章链接">
                 <span class="iconfont icon-round_link_fill text-3xl"></span>
               </a>
@@ -85,7 +85,7 @@
       <#include "module/widget/sponsor.ftl">
       <div class="inline-block text-center my-4  ">
         <span role="button"
-              class="iconfont icon-heart text-white relative inline-block bg-red-600 hover:bg-red-500 rounded-full py-3 z-50 w-28 h-full cursor-pointer like-btn"
+              class="iconfont icon-heart text-white relative inline-block bg-red-600 hover:bg-red-500 rounded-full py-3 z-10 w-28 h-full cursor-pointer like-btn"
               data-path="${blog_url!}/api/content/posts/${post.id}/likes"
               data-count="${post.likes}"
         >
