@@ -2,37 +2,33 @@
 <@layout title="分类：${category.name} | ${options.blog_title!} ">
   <main class="mx-auto" id="container">
     <header class="bg-gray-900 table fade-down relative w-full opacity-95 z-10 h-1/2">
-      <#if settings.categories_patternimg?? && settings.categories_patternimg!=''>
+      <#if category.thumbnail?? && category.thumbnail != ''>
         <div class="cover-bg bottom-0 left-0 right-0 top-0 opacity-30 absolute">
-          <img src="${settings.categories_patternimg!}"
-               class="h-full w-full left-0 object-cover absolute top-0 dark:filter-60"
+          <img src="${category.thumbnail!}"
+               class="h-full w-full left-0 object-cover absolute top-0 dark:filter-60 no-zoom"
                alt="${category.name}">
         </div>
       <#else>
-        <div class="placeholder-bg">
-        </div>
+          <div class="placeholder-bg"></div>
       </#if>
       <div class="h-96 align-middle table-cell relative w-full index flex justify-center">
         <h2 class="text-white mb-5 mt-4 leading-loose relative w-full text-4xl text-center dark:text-gray-300">
-         ${category.name}
+         ${category.name} <sup>${posts.totalElements}</sup>
         </h2>
-        <hr class="text-center bg-red-300 h-0.5 border-none w-20 mx-auto -mt-5 mb-3"/>
       </div>
     </header>
     <div class="mx-auto fade-up pt-4 <#if settings.posts_style!true>px-5 md:px-0 max-w-xl sm:max-w-2xl md:max-w-3xl lg:max-w-5xl <#else> px-5 max-w-4xl</#if>">
-        <#if settings.posts_style!true>
-            <#include "module/widget/post_cards.ftl">
-        <#else>
-            <#include "module/widget/post_list.ftl">
-        </#if>
+      <#if settings.posts_style!true>
+        <#include "module/widget/post_cards.ftl">
+      <#else>
+        <#include "module/widget/post_list.ftl">
+      </#if>
         <#-- 分页-->
-        <#if posts.totalPages gt 1>
-          <nav class="pagination flex flex-row justify-center my-8" role="navigation" aria-label="pagination">
-              <@paginationTag method="categoryPosts" page="${posts.number}" total="${posts.totalPages}" display="3" slug="${category.slug!}">                       
-                <#include "module/widget/pagination.ftl">
-              </@paginationTag>
-          </nav>
-        </#if>
+      <nav class="pagination flex flex-row justify-center my-8" role="navigation" aria-label="pagination">
+        <@paginationTag method="categoryPosts" page="${posts.number}" total="${posts.totalPages}" display="3" slug="${category.slug!}">
+          <#include "module/widget/pagination.ftl">
+        </@paginationTag>
+      </nav>
     </div>
   </main>
 </@layout>

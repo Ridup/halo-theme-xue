@@ -8,7 +8,7 @@
     color: #374151;
     word-break: break-word;
   }
-
+  
   .liked {
     color: var(--base-hover-color)
   }
@@ -17,7 +17,33 @@
     -webkit-animation: fade-down 0.3s;
     animation: fade-down 0.3s;
   }
+  
+  .bg-box-shadow {
+    cursor: pointer;
+    box-shadow: inset 0 0 #e5e7eb;
+    transition: box-shadow .5s cubic-bezier(.71,0,0,.99);
+    text-decoration: none;
+  }
+  
+  .bg-box-shadow.active,
+  .bg-box-shadow:hover {
+    border: none;
+    box-shadow: inset 0 -0.8em #e5e7eb;
+  }
+  
+  .back-2-top:hover .icon-top {
+    -webkit-animation-name: hvr-icon-up;
+    animation-name: hvr-icon-up;
+    -webkit-animation-duration: 0.75s;
+    animation-duration: 0.75s;
+    -webkit-animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
+  }
 
+  .back-2-top {
+    z-index: 999;
+  }
+  
   .fade-up {
     -webkit-animation: fade-up 0.3s;
     animation: fade-up 0.3s;
@@ -164,12 +190,11 @@
 
   @font-face {
     font-family: "iconfont"; /* Project id 2025344 */
-    src: url('./fonts/iconfont.woff2?t=1644596938602') format('woff2'),
-    url('./fonts/iconfont.woff?t=1644596938602') format('woff'),
-    url('./fonts/iconfont.ttf?t=1644596938602') format('truetype');
+    src: url('./fonts/iconfont.woff2?t=1649612262475') format('woff2'),
+    url('./fonts/iconfont.woff?t=1649612262475') format('woff'),
+    url('./fonts/iconfont.ttf?t=1649612262475') format('truetype');
   }
-
-
+  
   @keyframes fade-down {
     0% {
       transform: translateY(-20px);
@@ -332,6 +357,33 @@
     to {
       transform: none;
       opacity: 1
+    }
+  }
+
+  @-webkit-keyframes hvr-icon-up {
+    0%,
+    50%,
+    100% {
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+    }
+    25%,
+    75% {
+      -webkit-transform: translateY(-6px);
+      transform: translateY(-6px);
+    }
+  }
+  @keyframes hvr-icon-up {
+    0%,
+    50%,
+    100% {
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+    }
+    25%,
+    75% {
+      -webkit-transform: translateY(-6px);
+      transform: translateY(-6px);
     }
   }
 }

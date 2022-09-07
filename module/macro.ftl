@@ -10,9 +10,9 @@
     <@global.head />
     <title>${title}</title>
     <#include "styles.ftl">
-    <script src="${theme_base!}/source/js/jquery.min.js"></script>
+    <script src="${theme_base!}/source/js/plugins/jquery.min.js"></script>
   </head>
-  <body class="dark p-0 m-0 h-full font-sans">
+  <body class="p-0 m-0 h-full font-sans">
   <div class="flex flex-col h-full">
     <#include "header.ftl">
     <div class="bg-gray-50 dark:bg-gray-900" style="flex: 1 0 auto;">
@@ -20,9 +20,9 @@
     </div>
     <#include "footer.ftl">
   </div>
-
   </body>
   <#include "plugins.ftl"/>
+  <script src="${theme_base!}/source/js/utils.js?ver=${theme.version!}"></script>
   <script src="${theme_base!}/source/js/main.js?ver=${theme.version!}"></script>
   <#include "script.ftl">
 
